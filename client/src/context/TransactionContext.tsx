@@ -6,6 +6,7 @@ type ContextType = {
     formData: any;
     setFormData: any;
     handleChange: any;
+    sendTransaction: (() => Promise<void>);
 }
 
 const { ethereum } = window;
@@ -57,12 +58,17 @@ export const TransactionProvider = ({ children } : { children: any }) => {
         }
     }
 
+    const sendTransaction = async () => {
+        console.log('send transaction');
+    }
+
     const contextType: ContextType = {
         connectWallet: connectWallet,
         currentAccount: currentAccount,    
         formData: formData,
         setFormData: setFormData,
         handleChange: handleChange,
+        sendTransaction: sendTransaction,
     }
 
     useEffect(() => {

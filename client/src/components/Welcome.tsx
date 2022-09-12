@@ -18,12 +18,20 @@ const Input = ({placeholder, name, type, handleChange} : {placeholder: string, n
     />
 );
 
-const handleSubmit = () => {};
-
 const Welcome = () => {
 
     const context = useContext(TransactionContext);
-    console.log('context ', context);
+
+    const handleSubmit = () => {
+        const { addressTo, amount, keyword, message } = context?.formData;
+
+        // if (!addressTo || !amount || !keyword || !message) {
+        //     return;
+        // }
+
+        context?.sendTransaction();
+
+    };
 
     return (
         <div className="flex w-full justify-center items-center">
