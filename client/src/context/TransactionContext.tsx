@@ -2,7 +2,10 @@ import React, { useEffect, useState } from 'react';
 
 type ContextType = {
     connectWallet: (() => Promise<void>);
-    test: string;
+    currentAccount: string;
+    formData: any;
+    setFormData: any;
+    handleChange: any;
 }
 
 const { ethereum } = window;
@@ -12,6 +15,11 @@ export const TransactionContext = React.createContext<undefined | ContextType>(u
 export const TransactionProvider = ({ children } : { children: any }) => {
     
     const [currentAccount, setCurrentAccount] = useState("");
+    const [formData, setFormData] = useState({ addressTo: '', amount: '', keyword: '', message: '' });
+
+    const handleChange = (e: React.ChangeEvent<HTMLInputElement>, name: any) => {
+        setFormData((prevState) => ({ ...prevState, [name]: e.target.value }));
+    }
 
     const connectWallet = async () => {
         console.log('connectWallet() function in TransactionContext.tsx');
@@ -51,8 +59,11 @@ export const TransactionProvider = ({ children } : { children: any }) => {
 
     const contextType: ContextType = {
         connectWallet: connectWallet,
-        test: 'Ngoc',
-        }
+        currentAccount: currentAccount,    
+        formData: formData,
+        setFormData: setFormData,
+        handleChange: handleChange,
+    }
 
     useEffect(() => {
         checkIfWalletIsConnected();
