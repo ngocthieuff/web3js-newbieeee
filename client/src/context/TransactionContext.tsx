@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 type ContextType = {
     connectWallet: (() => Promise<void>);
@@ -23,8 +23,26 @@ export const TransactionProvider = ({ children } : { children: any }) => {
 
             if(!ethereum) return alert("Please install metamask");
             const accounts = await ethereum.request({ method: 'eth_requestAccounts' });
-            console.log('account connect successfully: ', accounts);
             setCurrentAccount(accounts[0]);
+            console.log('account connect successfully: ', currentAccount);
+        } catch (error) {
+            console.log(error);
+            throw new Error("No Ethereum object found.");
+        }
+    }
+
+    const checkIfWalletIsConnected = async () => {
+        try {
+            if(!ethereum) return alert("Please install metamask");
+            const accounts = await ethereum.request({ method: 'eth_accounts' });
+    
+            if(accounts.length) {
+                setCurrentAccount(accounts[0]);
+                console.log('account: ', accounts[0]);
+                // get all transactions
+            } else {
+                console.log('No accounts found');
+            }    
         } catch (error) {
             console.log(error);
             throw new Error("No Ethereum object found.");
@@ -35,6 +53,10 @@ export const TransactionProvider = ({ children } : { children: any }) => {
         connectWallet: connectWallet,
         test: 'Ngoc',
         }
+
+    useEffect(() => {
+        checkIfWalletIsConnected();
+    }, [])
 
     return (
         <TransactionContext.Provider value={contextType}>
