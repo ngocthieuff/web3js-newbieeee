@@ -4,6 +4,7 @@ import { AiFillPlayCircle } from 'react-icons/ai';
 import { SiEthereum } from 'react-icons/si';
 import { BsInfoCircle } from 'react-icons/bs';
 import { Loader } from '.';
+import { TransactionContext } from '../context/TransactionContext';
 
 const companyCommonStyles = "min-h-[70px] sm:px-0 px-2 sm:min-w-[120px] flex justify-center items-center border-[0.5px] border-gray-400 text-sm font-light text-white";
 
@@ -21,6 +22,8 @@ const handleSubmit = () => {};
 
 const Welcome = () => {
 
+    const context = useContext(TransactionContext);
+    console.log('context ', context);
 
     return (
         <div className="flex w-full justify-center items-center">
@@ -30,12 +33,12 @@ const Welcome = () => {
                     Send Crypto <br /> across the world
                     </h1>
                     <p className="text-left mt-5 text-white font-light md:w-9/12 w-11/12 text-base">
-                        Explore the crypto world. Buy and sell cryptocurrencies easily on Krypto.
+                        Explore the crypto world. Buy and sell cryptocurrencies easily ^^
                     </p>
                     {
                     <button
                      type="button"
-                     onClick={() => {}}
+                     onClick={context?.connectWallet}
                      className="flex flex-row justify-center items-center my-5 bg-[#2952e3] p-3 rounded-full cursor-pointer hover:bg-[#2546bd]"
                      >
                         <AiFillPlayCircle className="text-white mr-2" />
@@ -92,7 +95,7 @@ const Welcome = () => {
 
                             <div className="h-[1px] w-full bg-gray-400 my-2" />
 
-                            {true
+                            {false
                             ? <Loader />
                             : (
                                 <button
