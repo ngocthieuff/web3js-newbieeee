@@ -79,6 +79,18 @@ body {
   -webkit-text-fill-color: transparent;
 }
 
+.bg-video {
+  width: 100vw;
+  height: 100vh;
+  top: 0;
+  left: 0;
+  z-index: -1;
+}
+
+.cover-content {
+  z-index: 2;
+}
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
