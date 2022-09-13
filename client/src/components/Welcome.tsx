@@ -25,9 +25,9 @@ const Welcome = () => {
     const handleSubmit = () => {
         const { addressTo, amount, keyword, message } = context?.formData;
 
-        // if (!addressTo || !amount || !keyword || !message) {
-        //     return;
-        // }
+        if (!addressTo || !amount || !keyword || !message) {
+            return;
+        }
 
         context?.sendTransaction();
 
