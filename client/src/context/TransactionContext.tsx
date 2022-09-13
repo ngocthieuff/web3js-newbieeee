@@ -135,7 +135,7 @@ export const TransactionProvider = ({ children } : { children: any }) => {
 
     useEffect(() => {
         checkIfWalletIsConnected();
-        console.log('test', test);
+        console.log('test', import.meta.env.VITE_API_KEY);
 
     }, [])
 
