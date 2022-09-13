@@ -1,6 +1,6 @@
 ```console
 
- majaro home ~ node
+ manjaro home ~ node
  
 Welcome to Node.js v14.20.0.
 Type ".help" for more information.
