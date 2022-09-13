@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { contractABI, contractAddress } from '../utils/constants';
 import Web3 from 'web3';
-const web3 = new Web3('https://eth-goerli.g.alchemy.com/v2/sXBfX47--ndI99SKk1DWG4c391pebDQT');
+// const web3 = new Web3('https://eth-goerli.g.alchemy.com/v2/sXBfX47--ndI99SKk1DWG4c391pebDQT');
+// var web3 = new Web3(new Web3.providers.HttpProvider('https://eth-goerli.g.alchemy.com/v2/sXBfX47--ndI99SKk1DWG4c391pebDQT'));
 
 type ContextType = {
     connectWallet: (() => Promise<void>);
@@ -13,6 +14,9 @@ type ContextType = {
 }
 
 const { ethereum } = window;
+ 
+var test = import.meta.env.BASE_URL;
+console.log('test', test);
 
 export const TransactionContext = React.createContext<undefined | ContextType>(undefined);
 
@@ -79,6 +83,9 @@ export const TransactionProvider = ({ children } : { children: any }) => {
 
     const sendTransaction = async () => {
         try {
+            // var web3 = new Web3('http://localhost:8545');
+
+            // var web3 = new Web3(new Web3.providers.HttpProvider('https://eth-goerli.g.alchemy.com/v2/sXBfX47--ndI99SKk1DWG4c391pebDQT'));
             // if(!ethereum) return alert("Please install metamask");
             
             // const { addressTo, amount, keyword, message } = formData;
@@ -128,6 +135,8 @@ export const TransactionProvider = ({ children } : { children: any }) => {
 
     useEffect(() => {
         checkIfWalletIsConnected();
+        console.log('test', test);
+
     }, [])
 
     return (
